@@ -7,7 +7,7 @@ import (
 
 	"log"
 
-	database "inventory-system/databases"
+	database "github.com/rikijoniiskandar/inventory-system/databases"
 )
 
 func main(){

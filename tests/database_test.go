@@ -3,9 +3,12 @@ package tests
 import (
 	"bufio"
 	"database/sql"
+	"fmt"
 	"os"
 	"strings"
 	"testing"
+
+	_ "github.com/go-sql-driver/mysql"
 
 	"github.com/stretchr/testify/assert"
 )
@@ -42,23 +45,29 @@ func TestDatabaseConnection(t *testing.T) {
 	var envFile string
 	switch env {
 	case "development":
-		envFile = ".env-dev"
+		envFile = "../.env-dev"
 	case "production":
-		envFile = ".env"
+		envFile = "../.env"
 	case "test":
-		envFile = ".env-test"
+		envFile = "../.env-test"
 	default:
 		t.Fatalf("Unknown environment: %s", env)
 	}
 
 	// Memuat variabel lingkungan dari file .env
 	err := loadEnvVariables(envFile)
-	assert.NoError(t, err, "Failed to load environment variables")
+	assert.NoError(t, err, "Failed to load environment variables gess")
 
-	dsn := "username:password@tcp(localhost:3306)/database_name"
+	dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s",
+	os.Getenv("DB_USERNAME"),
+	os.Getenv("DB_PASSWORD"),
+	os.Getenv("DB_HOST"),
+	os.Getenv("DB_PORT"),
+	os.Getenv("DB_NAME"))
+
 	// Membuka koneksi database
 	db, err := sql.Open("mysql", dsn)
-	assert.NoError(t, err, "Failed to open database connection")
+	assert.NoError(t, err, "Failed to open database connection gess")
 
 	// Menguji koneksi database
 	err = db.Ping()
