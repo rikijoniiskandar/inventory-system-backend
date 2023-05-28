@@ -9,6 +9,8 @@
 *.dylib
 
 .env
+.env-test
+.env-dev
 data/*
 # Test binary, built with `go test -c`
 *.test
