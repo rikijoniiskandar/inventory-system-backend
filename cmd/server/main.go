@@ -7,7 +7,8 @@ import (
 
 	"log"
 
-	database "github.com/rikijoniiskandar/inventory-system/databases"
+	database "github.com/rikijoniiskandar/inventory-system/infrastructure/databases"
+	"github.com/rikijoniiskandar/inventory-system/migrations"
 )
 
 func main(){
@@ -17,6 +18,12 @@ func main(){
 		log.Fatal("Failed to connect to database:", err)
 	}
 	r := gin.Default()
+
+	 // Menjalankan migrasi otomatis
+	 err = migrations.RunAutoMigrations(db)
+	 if err != nil {
+		 panic(err)
+	 }
 
 	// Set database connection to context
 	r.Use(func(c *gin.Context) {

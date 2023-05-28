@@ -48,5 +48,6 @@ func teardown() {
 func TestAll(t *testing.T) {
 	// Menjalankan semua unit test
 	tests.TestDatabaseConnection(t)
+	tests.TestRunAutoMigrations(t)
 	// Tambahkan unit test lainnya di sini
 }
