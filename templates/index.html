@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Inventory Sistem</title>
+</head>
+<body>
+    <div style="min-height: 90vh; display: flex; justify-items: center; justify-content: center;">
+        <h1 style="margin: auto">Welcome to Inventory System</h1>
+    </div>
+    <footer style="position: absolute; bottom: 2; width: 100%;">
+        <div style="display: flex; justify-content: center;">
+            &copy; <span id="years"></span> Created by Riki Joni Iskandar
+        </div>
+    </footer>
+
+    <script>
+        const years = new Date().getFullYear()
+
+        document.getElementById('years').innerText = `${years}- `
+    </script>
+</body>
+</html>
